@@ -21,6 +21,9 @@ struct InlinePatchBypass {
   static bool ReapplyHook(uintptr_t addr);
 
 private:
+  static bool enabled_;
+
+public:
   struct WatchPoint {
     uintptr_t hook_addr;      // Hook 点地址
     size_t patch_size;     // 被修改的代码大小
@@ -30,7 +33,6 @@ private:
   };
 
   static std::vector<WatchPoint> watch_points_;
-  static bool enabled_;
 
   // 注册所有已 Hook 的点
   static void RegisterHookedPoints();

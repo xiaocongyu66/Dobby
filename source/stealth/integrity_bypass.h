@@ -16,6 +16,9 @@ struct IntegrityBypass {
   static void Disable();
 
 private:
+  static bool enabled_;
+
+public:
   // 被保护的模块信息
   struct ProtectedModule {
     std::string name;
@@ -26,7 +29,6 @@ private:
   };
 
   static std::vector<ProtectedModule> protected_modules_;
-  static bool enabled_;
 
   // 计算 .text 段的哈希（简易版本，用于对比）
   static void compute_text_hash(uintptr_t base, size_t size,
